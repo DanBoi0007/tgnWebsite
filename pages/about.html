@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About Us | The Globe Network</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+      }
+
+      body {
+        line-height: 1.6;
+        color: #333;
+        background-color: white;
+        min-height: 100vh;
+        position: relative;
+      }
+
+      /* Navigation styles */
+      nav {
+        position: absolute;
+        width: 100%;
+        z-index: 100;
+        padding: 1.5rem;
+        top: 0;
+        left: 0;
+      }
+
+      .nav-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        text-decoration: none;
+      }
+
+      .logo img {
+        height: 60px;
+        width: auto;
+        vertical-align: middle;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 2rem;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: #1a1a1a;
+        font-weight: 700;
+        transition: all 0.2s;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+      }
+
+      .nav-links a:hover {
+        background: rgba(0, 0, 0, 0.05);
+      }
+
+      /* Active page indicator */
+      .nav-links .active-page {
+        background: rgba(0, 0, 0, 0.1);
+        color: #1a1a1a;
+        font-weight: 700;
+      }
+
+      .nav-links .active-page:hover {
+        background: rgba(0, 0, 0, 0.15);
+      }
+
+      /* About page specific styles */
+      .about-container {
+        position: relative;
+        top: 80px;
+        max-width: 1200px;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 0 2rem;
+        min-height: calc(100vh - 120px);
+        margin-bottom: 12rem;
+      }
+
+      .about-header {
+        text-align: center;
+        padding-top: 3rem;
+        margin-bottom: 3rem;
+      }
+
+      .about-header h1 {
+        font-size: 2.5rem;
+        color: #1a1a1a;
+        margin-bottom: 1rem;
+      }
+
+      .about-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: center;
+      }
+
+      .about-text {
+        padding: 2rem;
+      }
+
+      .about-text h2 {
+        color: #1a73e8;
+        margin-bottom: 1.5rem;
+        font-size: 1.8rem;
+      }
+
+      .about-text p {
+        margin-bottom: 1.5rem;
+        font-size: 1.1rem;
+        color: #666;
+      }
+
+      .about-image {
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .about-image img {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      .values-section {
+        margin-top: 6rem;
+        text-align: center;
+      }
+
+      .values-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        margin-top: 3rem;
+      }
+
+      .value-card {
+        padding: 2rem;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .value-card h3 {
+        color: #1a73e8;
+        margin-bottom: 1rem;
+      }
+
+      .value-card p {
+        color: #666;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .about-content {
+          grid-template-columns: 1fr;
+          gap: 2rem;
+        }
+
+        .about-text {
+          order: 2;
+        }
+
+        .about-image {
+          order: 1;
+        }
+      }
+
+      /* Include footer styles */
+      footer {
+        background: #f8f9fa;
+        padding: 4rem 2rem 2rem;
+        margin-top: auto;
+        border-top: 1px solid #eee;
+      }
+
+      .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .footer-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 2rem;
+        margin-bottom: 3rem;
+      }
+
+      .footer-section h4 {
+        color: #1a1a1a;
+        margin-bottom: 1rem;
+        font-size: 1.1rem;
+      }
+
+      .footer-section ul {
+        list-style: none;
+      }
+
+      .footer-section ul li {
+        margin-bottom: 0.5rem;
+      }
+
+      .footer-section ul li a {
+        color: #666;
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+
+      .footer-section ul li a:hover {
+        color: #1a73e8;
+      }
+
+      .social-links {
+        display: flex;
+        gap: 1rem;
+      }
+
+      .social-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: #fff;
+        transition: transform 0.2s;
+      }
+
+      .social-icon:hover {
+        transform: translateY(-2px);
+      }
+
+      .social-icon img {
+        width: 20px;
+        height: 20px;
+        filter: invert(20%);
+      }
+
+      .footer-bottom {
+        padding-top: 2rem;
+        border-top: 1px solid #eee;
+        text-align: center;
+        color: #666;
+        font-size: 0.9rem;
+      }
+
+      .footer-bottom p {
+        margin-bottom: 0.5rem;
+      }
+
+      /* Hamburger Menu Styles */
+      .hamburger {
+        display: none;
+        cursor: pointer;
+        padding: 0.5rem;
+        position: relative;
+        margin-left: auto;
+        width: 25px;
+        height: 21px;
+      }
+
+      .hamburger span {
+        display: block;
+        width: 25px;
+        height: 3px;
+        background-color: #1a1a1a;
+        margin: 5px 0;
+        transition: all 0.3s ease;
+        position: absolute;
+        left: 0;
+      }
+
+      .hamburger span:nth-child(1) {
+        top: 0;
+      }
+      .hamburger span:nth-child(2) {
+        top: 9px;
+      }
+      .hamburger span:nth-child(3) {
+        top: 18px;
+      }
+
+      /* Mobile Navigation */
+      @media (max-width: 768px) {
+        .nav-links {
+          position: fixed;
+          top: 0;
+          right: -100%;
+          width: 70%;
+          height: 100vh;
+          background: rgba(255, 255, 255, 0.3);
+          backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          z-index: 100;
+          transition: right 0.3s ease;
+          border-left: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .nav-links a {
+          color: #1a1a1a;
+          margin: 1.5rem 0;
+          font-size: 1.2rem;
+          font-weight: 600;
+          padding: 0.5rem 2rem;
+          border-radius: 4px;
+          transition: all 0.2s ease;
+        }
+
+        .nav-links a:hover {
+          color: #1a1a1a;
+          background: rgba(0, 0, 0, 0.05);
+        }
+
+        .hamburger {
+          display: block;
+          z-index: 101;
+        }
+
+        .hamburger.active {
+          position: fixed;
+          top: 1.5rem;
+          right: 1.5rem;
+        }
+
+        .nav-links.active {
+          right: 0;
+        }
+
+        /* Hamburger Animation */
+        .hamburger.active span:nth-child(1) {
+          transform: translateY(9px) rotate(45deg);
+        }
+
+        .hamburger.active span:nth-child(2) {
+          opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+          transform: translateY(-9px) rotate(-45deg);
+        }
+      }
+
+      .video-container {
+        position: relative;
+        width: 100%;
+        padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .video-container iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: 0;
+      }
+
+      /* Update the existing media query to handle the video container */
+      @media (max-width: 768px) {
+        .about-content {
+          grid-template-columns: 1fr;
+          gap: 2rem;
+        }
+
+        .about-text {
+          order: 2;
+        }
+
+        .video-container {
+          order: 1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div class="nav-content">
+        <a href="../index.html" class="logo">
+          <img src="../assets/tgn-logo.png" alt="The Globe Network Logo" />
+        </a>
+        <div class="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <div class="nav-links">
+          <a href="../index.html">Home</a>
+          <a href="about.html" class="active-page">About</a>
+          <a href="servers.html">Servers</a>
+          <a href="apply.html">Apply</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="about-container">
+      <div class="about-header">
+        <h1>About The Globe Network</h1>
+        <p>Building a global community of ERLC roleplayers</p>
+      </div>
+
+      <div class="about-content">
+        <div class="about-text">
+          <h2>Our Story</h2>
+          <p>
+            The Globe Network was founded with a vision to create an inclusive,
+            international community for Emergency Response: Liberty County
+            players. We believe that roleplay experiences should transcend
+            geographical boundaries and bring together players from different
+            cultures and backgrounds.
+          </p>
+          <p>
+            Starting with our first servers in London, Rio de Janeiro,
+            and Giza, we are committed to expanding our network, each
+            new server delivering immersive roleplay and offering unique
+            roleplay experiences that reflect local emergency
+            response practices and cultures.
+          </p>
+          <p>
+            Today, we're proud to host a thriving community of dedicated
+            roleplayers, supported by our professional staff team who ensure
+            high-quality, immersive experiences across all our servers.
+          </p>
+        </div>
+        <div class="video-container">
+          <iframe
+            width="100%"
+            height="315"
+            src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
+            title="The Globe Network Introduction"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </div>
+
+      <div class="values-section">
+        <h2>Our Core Values</h2>
+        <div class="values-grid">
+          <div class="value-card">
+            <h3>Community First</h3>
+            <p>
+              We prioritize creating a welcoming, inclusive environment where
+              every player feels valued and respected.
+            </p>
+          </div>
+          <div class="value-card">
+            <h3>Quality Roleplay</h3>
+            <p>
+              We maintain high standards for roleplay to ensure immersive and
+              enjoyable experiences for all players.
+            </p>
+          </div>
+          <div class="value-card">
+            <h3>Cultural Diversity</h3>
+            <p>
+              We celebrate different cultures and perspectives, incorporating
+              them into our unique server experiences.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="../js/components.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        Components.loadFooter();
+      });
+    </script>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        const links = document.querySelectorAll('.nav-links a');
+
+        hamburger.addEventListener('click', () => {
+          hamburger.classList.toggle('active');
+          navLinks.classList.toggle('active');
+        });
+
+        links.forEach((link) => {
+          link.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            navLinks.classList.remove('active');
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

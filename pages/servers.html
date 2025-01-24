@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Our Servers | The Globe Network</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+      }
+
+      body {
+        line-height: 1.6;
+        color: #333;
+        background-color: white;
+        min-height: 100vh;
+        position: relative;
+      }
+
+      /* Navigation styles */
+      nav {
+        position: absolute;
+        width: 100%;
+        z-index: 100;
+        padding: 1.5rem;
+        top: 0;
+        left: 0;
+      }
+
+      .nav-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        text-decoration: none;
+      }
+
+      .logo img {
+        height: 60px;
+        width: auto;
+        vertical-align: middle;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 2rem;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: #1a1a1a;
+        font-weight: 700;
+        transition: all 0.2s;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+      }
+
+      .nav-links a:hover {
+        background: rgba(0, 0, 0, 0.05);
+      }
+
+      /* Active page indicator */
+      .nav-links .active-page {
+        background: rgba(0, 0, 0, 0.1);
+        color: #1a1a1a;
+        font-weight: 700;
+      }
+
+      .nav-links .active-page:hover {
+        background: rgba(0, 0, 0, 0.15);
+      }
+
+      /* Servers page specific styles */
+      .servers-container {
+        position: relative;
+        top: 80px;
+        max-width: 1200px;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 0 2rem;
+        min-height: calc(100vh - 120px);
+        margin-bottom: 12rem;
+      }
+
+      .servers-header {
+        text-align: center;
+        padding-top: 3rem;
+        margin-bottom: 3rem;
+      }
+
+      .servers-header h1 {
+        font-size: 2.5rem;
+        color: #1a1a1a;
+        margin-bottom: 1rem;
+      }
+
+      .map-container {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 16/9;
+        background: url('../assets/world-map.png') no-repeat center;
+        background-size: contain;
+      }
+
+      .server-dot {
+        position: absolute;
+        width: 12px;
+        height: 12px;
+        transform: translate(-50%, -50%);
+        background: #1a73e8;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: all 0.3s;
+        z-index: 100;
+      }
+
+      .server-dot::before {
+        content: '';
+        position: absolute;
+        width: 24px;
+        height: 24px;
+        background: rgba(26, 115, 232, 0.2);
+        border-radius: 50%;
+        top: -6px;
+        left: -6px;
+        animation: pulse 2s infinite;
+      }
+
+      .server-label {
+        position: absolute;
+        background: white;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transform: translateY(-40px);
+        opacity: 0;
+        transition: all 0.3s;
+        pointer-events: none;
+        white-space: nowrap;
+      }
+
+      .server-dot:hover {
+        transform: translate(-50%, -50%) scale(1.2);
+      }
+
+      .server-dot:hover .server-label {
+        opacity: 1;
+        transform: translateY(-50px);
+      }
+
+      /* Server locations */
+      #london {
+        top: 23.4%;
+        left: 45.4%;
+      }
+
+      #rio {
+        top: 72.5%;
+        left: 31.5%;
+      }
+      #giza {
+        top: 37.25%;
+        left: 55%;
+      }
+
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+          opacity: 1;
+        }
+        100% {
+          transform: scale(2);
+          opacity: 0;
+        }
+      }
+
+      /* Server cards section */
+      .server-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-top: 4rem;
+      }
+
+      .server-card {
+        background: white;
+        border-radius: 10px;
+        padding: 2rem;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 350px;
+      }
+
+      .hub-card {
+        background: linear-gradient(135deg, #1a73e8, #0d47a1);
+        color: white;
+        border-radius: 10px;
+        padding: 2rem;
+        box-shadow: 0 4px 8px rgba(26, 115, 232, 0.2);
+        grid-column: 1 / -1; /* Makes the card span full width */
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .hub-card h2 {
+        color: white;
+        margin-bottom: 0.5rem;
+      }
+
+      .hub-card p {
+        color: rgba(255, 255, 255, 0.9);
+        margin-bottom: 1rem;
+      }
+
+      .hub-card .event-tag {
+        display: inline-block;
+        background: rgba(255, 255, 255, 0.2);
+        padding: 0.3rem 0.8rem;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+      }
+
+      .server-info {
+        margin-bottom: 1.5rem;
+      }
+
+      .server-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      }
+
+      .server-card h3 {
+        color: #1a1a1a;
+        margin-bottom: 1rem;
+        font-size: 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .server-card p {
+        color: #666;
+        margin-bottom: 1.5rem;
+      }
+
+      .join-button {
+        display: inline-block;
+        background: #1a73e8;
+        color: white;
+        padding: 0.75rem 1.5rem;
+        border-radius: 4px;
+        text-decoration: none;
+        font-weight: 700;
+        transition: background 0.2s;
+      }
+
+      .join-button:hover {
+        background: #1557b0;
+      }
+
+      /* Include the same footer styles as other pages */
+      footer {
+        background: #f8f9fa;
+        padding: 4rem 2rem 2rem;
+        margin-top: auto;
+        border-top: 1px solid #eee;
+      }
+
+      .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .footer-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 2rem;
+        margin-bottom: 3rem;
+      }
+
+      .footer-section h4 {
+        color: #1a1a1a;
+        margin-bottom: 1rem;
+        font-size: 1.1rem;
+      }
+
+      .footer-section ul {
+        list-style: none;
+      }
+
+      .footer-section ul li {
+        margin-bottom: 0.5rem;
+      }
+
+      .footer-section ul li a {
+        color: #666;
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+
+      .footer-section ul li a:hover {
+        color: #1a73e8;
+      }
+
+      .social-links {
+        display: flex;
+        gap: 1rem;
+      }
+
+      .social-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: #fff;
+        transition: transform 0.2s;
+      }
+
+      .social-icon:hover {
+        transform: translateY(-2px);
+      }
+
+      .social-icon img {
+        width: 20px;
+        height: 20px;
+        filter: invert(20%);
+      }
+
+      .footer-bottom {
+        padding-top: 2rem;
+        border-top: 1px solid #eee;
+        text-align: center;
+        color: #666;
+        font-size: 0.9rem;
+      }
+
+      .footer-bottom p {
+        margin-bottom: 0.5rem;
+      }
+
+      /* Hamburger Menu Styles */
+      .hamburger {
+        display: none;
+        cursor: pointer;
+        padding: 0.5rem;
+        position: relative;
+        margin-left: auto;
+        width: 25px;
+        height: 21px;
+      }
+
+      .hamburger span {
+        display: block;
+        width: 25px;
+        height: 3px;
+        background-color: #1a1a1a;
+        margin: 5px 0;
+        transition: all 0.3s ease;
+        position: absolute;
+        left: 0;
+      }
+
+      .hamburger span:nth-child(1) {
+        top: 0;
+      }
+      .hamburger span:nth-child(2) {
+        top: 9px;
+      }
+      .hamburger span:nth-child(3) {
+        top: 18px;
+      }
+
+      /* Mobile Navigation */
+      @media (max-width: 768px) {
+        .hamburger {
+          display: block;
+          z-index: 101;
+        }
+
+        .nav-links {
+          position: fixed;
+          top: 0;
+          right: -100%;
+          width: 70%;
+          height: 100vh;
+          background: rgba(255, 255, 255, 0.3);
+          backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          z-index: 100;
+          transition: right 0.3s ease;
+          border-left: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .nav-links.active {
+          right: 0;
+        }
+
+        .nav-links a {
+          color: #1a1a1a;
+          margin: 1.5rem 0;
+          font-size: 1.2rem;
+          font-weight: 600;
+          padding: 0.5rem 2rem;
+          border-radius: 4px;
+          transition: all 0.2s ease;
+        }
+
+        .nav-links a:hover {
+          color: #1a1a1a;
+          background: rgba(0, 0, 0, 0.05);
+        }
+
+        /* Hamburger Animation */
+        .hamburger.active span:nth-child(1) {
+          transform: translateY(9px) rotate(45deg);
+        }
+
+        .hamburger.active span:nth-child(2) {
+          opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+          transform: translateY(-9px) rotate(-45deg);
+        }
+      }
+
+      .country-flag {
+        width: 28px;
+        height: 28px;
+        vertical-align: middle;
+        margin-right: 12px;
+        border-radius: 4px;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        object-fit: cover;
+        transform: scale(1.2);
+        display: inline-block;
+      }
+
+      .card-content {
+        flex: 1;
+      }
+
+      .card-footer {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .server-code {
+        color: #666;
+        text-align: left;
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+  </head>
+  <body>
+    <nav>
+      <div class="nav-content">
+        <a href="../index.html" class="logo">
+          <img src="../assets/tgn-logo.png" alt="The Globe Network Logo" />
+        </a>
+        <div class="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <div class="nav-links">
+          <a href="../index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="servers.html" class="active-page">Servers</a>
+          <a href="apply.html">Apply</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="servers-container">
+      <div class="servers-header">
+        <h1>Our Global Servers</h1>
+        <p>Experience ERLC roleplay across different regions and cultures</p>
+      </div>
+
+      <div class="map-container">
+        <div id="london" class="server-dot">
+          <div class="server-label">London, UK</div>
+        </div>
+        <div id="rio" class="server-dot">
+          <div class="server-label">Rio de Janeiro, Brazil</div>
+        </div>
+        <div id="giza" class="server-dot">
+          <div class="server-label">Giza, Egypt</div>
+        </div>
+      </div>
+
+      <div class="server-cards">
+        <div class="hub-card">
+          <div class="hub-content">
+            <span class="event-tag">Events & Community</span>
+            <h2>TGN Hub</h2>
+            <p>
+              Join our special events server where we host community gatherings,
+              competitions, and special occasions. Not for regular roleplay -
+              this server is dedicated to bringing our community together!
+            </p>
+            <div class="server-status">
+              <span class="status-dot"></span>
+              Server Code: <b>tgnHUB</b>
+            </div>
+          </div>
+        </div>
+
+        <div class="server-card">
+          <div class="card-content">
+            <h3>
+              <img
+                src="https://cdn.jsdelivr.net/npm/country-flag-icons/3x2/BR.svg"
+                alt="Brazil Flag"
+                class="country-flag"
+              />
+              Rio de Janeiro Server
+            </h3>
+            <p>
+              Immerse yourself in Brazilian emergency services and unique South
+              American roleplay.
+            </p>
+          </div>
+          <div class="card-footer">
+            <div class="server-code">Server Code: <b>tgnRIO</b></div>
+            <a
+              href="roblox://placeId=2534724415&launchData=%7B%22psCode%22%3A%22tgnRIO%22%7D"
+              class="join-button"
+              target="_blank"
+              >Join Server Via Link</a
+            >
+          </div>
+        </div>
+
+        <div class="server-card">
+          <div class="card-content">
+            <h3>
+              <img
+                src="https://cdn.jsdelivr.net/npm/country-flag-icons/3x2/GB.svg"
+                alt="UK Flag"
+                class="country-flag"
+              />
+              London Server
+            </h3>
+            <p>
+              Experience British-style emergency response roleplay in our London
+              server.
+            </p>
+          </div>
+          <div class="card-footer">
+            <div class="server-code">Server Code: <b>tgnGB</b></div>
+            <a
+              href="https://discord.com/invite/BQ3D9ThAyw"
+              class="join-button"
+              target="_blank"
+              >Join Server Via Link</a
+            >
+          </div>
+        </div>
+
+        <div class="server-card">
+          <div class="card-content">
+            <h3>
+              <img
+                src="https://cdn.jsdelivr.net/npm/country-flag-icons/3x2/EG.svg"
+                alt="Egypt Flag"
+                class="country-flag"
+              />
+              Giza Server
+            </h3>
+            <p>
+              Explore emergency response roleplay with an Egyptian and Middle
+              Eastern theme.
+            </p>
+          </div>
+          <div class="card-footer">
+            <div class="server-code">Server Code: <b>tgnGIZA</b></div>
+            <a
+              href="https://discord.com/invite/BQ3D9ThAyw"
+              class="join-button"
+              target="_blank"
+              >Join Server Via Link</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="../js/components.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        Components.loadFooter();
+      });
+    </script>
+  </body>
+</html>

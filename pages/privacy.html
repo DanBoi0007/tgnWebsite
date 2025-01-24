@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Privacy Policy | The Globe Network</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+      /* Include your existing base styles */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+      }
+
+      body {
+        line-height: 1.6;
+        color: #333;
+        background-color: white;
+        min-height: 100vh;
+        position: relative;
+      }
+
+      /* Include your existing navigation styles */
+
+      .privacy-container {
+        position: relative;
+        top: 80px;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+        min-height: calc(100vh - 120px);
+        margin-bottom: 12rem;
+      }
+
+      .privacy-header {
+        text-align: center;
+        padding-top: 3rem;
+        margin-bottom: 3rem;
+      }
+
+      .privacy-header h1 {
+        font-size: 2.5rem;
+        color: #1a1a1a;
+        margin-bottom: 1rem;
+      }
+
+      .privacy-content {
+        background: white;
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .privacy-section {
+        margin-bottom: 2rem;
+      }
+
+      .privacy-section h2 {
+        color: #1a1a1a;
+        margin-bottom: 1rem;
+        font-size: 1.5rem;
+      }
+
+      .privacy-section p {
+        margin-bottom: 1rem;
+        color: #666;
+      }
+
+      .privacy-section ul {
+        margin-bottom: 1rem;
+        padding-left: 1.5rem;
+        color: #666;
+      }
+
+      .privacy-section li {
+        margin-bottom: 0.5rem;
+      }
+
+      /* Include your existing footer styles */
+
+      nav {
+        position: absolute;
+        width: 100%;
+        z-index: 100;
+        padding: 1.5rem;
+        top: 0;
+        left: 0;
+      }
+
+      .nav-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      /* Navigation styles */
+      .logo img {
+        height: 60px;
+        width: auto;
+        vertical-align: middle;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 2rem;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: #1a1a1a;
+        font-weight: 600;
+        transition: all 0.2s;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+      }
+
+      .nav-links a:hover {
+        background: rgba(0, 0, 0, 0.05);
+      }
+
+      .nav-links .active-page {
+        background: rgba(0, 0, 0, 0.1);
+        color: #1a1a1a;
+        font-weight: 700;
+      }
+
+      .nav-links .active-page:hover {
+        background: rgba(0, 0, 0, 0.15);
+      }
+
+      /* Footer styles */
+      footer {
+        background: #f8f9fa;
+        padding: 4rem 2rem 2rem;
+        margin-top: auto;
+        border-top: 1px solid #eee;
+      }
+
+      .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .footer-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 2rem;
+        margin-bottom: 3rem;
+      }
+
+      .footer-section h4 {
+        color: #1a1a1a;
+        margin-bottom: 1rem;
+        font-size: 1.1rem;
+      }
+
+      .footer-section ul {
+        list-style: none;
+      }
+
+      .footer-section ul li {
+        margin-bottom: 0.5rem;
+      }
+
+      .footer-section ul li a {
+        color: #666;
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+
+      .footer-section ul li a:hover {
+        color: #1a73e8;
+      }
+
+      .social-links {
+        display: flex;
+        gap: 1rem;
+      }
+
+      .social-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: #fff;
+        transition: transform 0.2s;
+      }
+
+      .social-icon:hover {
+        transform: translateY(-2px);
+      }
+
+      .social-icon img {
+        width: 20px;
+        height: 20px;
+        filter: invert(20%);
+      }
+
+      .footer-bottom {
+        padding-top: 2rem;
+        border-top: 1px solid #eee;
+        text-align: center;
+        color: #666;
+        font-size: 0.9rem;
+      }
+
+      .footer-bottom p {
+        margin-bottom: 0.5rem;
+      }
+
+      /* Hamburger Menu Styles */
+      .hamburger {
+        display: none;
+        cursor: pointer;
+        padding: 0.5rem;
+        position: relative;
+        margin-left: auto;
+        width: 25px;
+        height: 21px;
+      }
+
+      .hamburger span {
+        display: block;
+        width: 25px;
+        height: 3px;
+        background-color: #1a1a1a;
+        margin: 5px 0;
+        transition: all 0.3s ease;
+        position: absolute;
+        left: 0;
+      }
+
+      .hamburger span:nth-child(1) {
+        top: 0;
+      }
+      .hamburger span:nth-child(2) {
+        top: 9px;
+      }
+      .hamburger span:nth-child(3) {
+        top: 18px;
+      }
+
+      /* Mobile Navigation */
+      @media (max-width: 768px) {
+        .hamburger {
+          display: block;
+          z-index: 101;
+        }
+
+        .nav-links {
+          position: fixed;
+          top: 0;
+          right: -100%;
+          width: 70%;
+          height: 100vh;
+          background: rgba(255, 255, 255, 0.3);
+          backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          z-index: 100;
+          transition: right 0.3s ease;
+          border-left: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .nav-links.active {
+          right: 0;
+        }
+
+        .nav-links a {
+          color: #1a1a1a;
+          margin: 1.5rem 0;
+          font-size: 1.2rem;
+          font-weight: 600;
+          padding: 0.5rem 2rem;
+          border-radius: 4px;
+          transition: all 0.2s ease;
+        }
+
+        .nav-links a:hover {
+          color: #1a1a1a;
+          background: rgba(0, 0, 0, 0.05);
+        }
+
+        /* Hamburger Animation */
+        .hamburger.active span:nth-child(1) {
+          transform: translateY(9px) rotate(45deg);
+        }
+
+        .hamburger.active span:nth-child(2) {
+          opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+          transform: translateY(-9px) rotate(-45deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Include your navigation -->
+    <nav>
+      <div class="nav-content">
+        <a href="../index.html" class="logo">
+          <img src="../assets/tgn-logo.png" alt="The Globe Network Logo" />
+        </a>
+        <div class="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <div class="nav-links">
+          <a href="../index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="servers.html">Servers</a>
+          <a href="apply.html">Apply</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="privacy-container">
+      <div class="privacy-header">
+        <h1>Privacy Policy</h1>
+        <p>Last updated: January 2025</p>
+      </div>
+
+      <div class="privacy-content">
+        <div class="privacy-section">
+          <h2>Introduction</h2>
+          <p>
+            The Globe Network ("we," "our," or "us") is committed to protecting
+            the privacy of our users. This Privacy Policy explains how we
+            collect, use, and safeguard your information when you participate in
+            our Emergency Response: Liberty County (ERLC) roleplay servers and
+            use our associated Discord services.
+          </p>
+        </div>
+
+        <div class="privacy-section">
+          <h2>Information We Collect</h2>
+          <p>We collect the following types of information:</p>
+          <ul>
+            <li>Discord username and ID</li>
+            <li>Roblox username</li>
+            <li>
+              Communication data within our Discord server and ERLC servers
+            </li>
+            <li>Server activity logs</li>
+            <li>Application form responses</li>
+          </ul>
+        </div>
+
+        <div class="privacy-section">
+          <h2>How We Use Your Information</h2>
+          <p>We use the collected information for:</p>
+          <ul>
+            <li>Managing and operating our ERLC servers</li>
+            <li>Processing applications</li>
+            <li>Enforcing our server rules and guidelines</li>
+            <li>Investigating reported incidents</li>
+            <li>Communicating with users about server updates and events</li>
+            <li>Improving our services and user experience</li>
+          </ul>
+        </div>
+
+        <div class="privacy-section">
+          <h2>Information Sharing</h2>
+          <p>
+            We do not sell or share your personal information with third
+            parties. Your information is only accessible to authorized staff
+            members for server management purposes.
+          </p>
+        </div>
+
+        <div class="privacy-section">
+          <h2>Data Security</h2>
+          <p>
+            We implement appropriate security measures to protect your
+            information. Access to user data is restricted to authorized staff
+            members only, and we regularly review our security practices.
+          </p>
+        </div>
+
+        <div class="privacy-section">
+          <h2>Your Rights</h2>
+          <p>You have the right to:</p>
+          <ul>
+            <li>Access your personal information</li>
+            <li>Request correction of inaccurate information</li>
+            <li>Request deletion of your information</li>
+            <li>Opt-out of non-essential communications</li>
+          </ul>
+        </div>
+
+        <div class="privacy-section">
+          <h2>Children's Privacy</h2>
+          <p>
+            While we welcome players of all ages in our ERLC servers, our
+            Discord server is strictly for users aged 13 and older, in
+            compliance with
+            <a href="https://discord.com/terms" target="_blank"
+              >Discord's Terms of Service</a
+            >. We do not knowingly allow or collect information from children
+            under 13 in our Discord server.
+          </p>
+          <p>
+            If you are a parent or guardian and discover that your child under
+            13 has accessed our Discord server, please contact us immediately
+            through Discord or email. We will take steps to remove their access
+            and any associated information.
+          </p>
+          <p>For players under 13:</p>
+          <ul>
+            <li>You are welcome to play on our ERLC servers</li>
+            <li>You must not access our Discord server until you are 13</li>
+            <li>Parental supervision is recommended</li>
+            <li>You must follow all server rules and guidelines</li>
+          </ul>
+        </div>
+
+        <div class="privacy-section">
+          <h2>Changes to This Policy</h2>
+          <p>
+            We may update this Privacy Policy from time to time. We will notify
+            users of any material changes through our Discord server and
+            website.
+          </p>
+        </div>
+
+        <div class="privacy-section">
+          <h2>Contact Us</h2>
+          <p>
+            If you have questions about this Privacy Policy or our privacy
+            practices, please contact us through our Discord server or email.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Include your footer -->
+    <script src="../js/components.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        const links = document.querySelectorAll('.nav-links a');
+
+        hamburger.addEventListener('click', () => {
+          hamburger.classList.toggle('active');
+          navLinks.classList.toggle('active');
+        });
+
+        links.forEach((link) => {
+          link.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            navLinks.classList.remove('active');
+          });
+        });
+      });
+
+      document.addEventListener('DOMContentLoaded', () => {
+        Components.loadFooter();
+      });
+    </script>
+  </body>
+</html>

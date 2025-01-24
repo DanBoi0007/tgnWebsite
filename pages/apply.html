@@ -1,0 +1,574 @@
+<!-- TO OPEN/CLOSE APPLICATIONS REMOVE/ADD disabled CLASS FROM THE DIV -->>
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Apply | The Globe Network</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+      }
+
+      body {
+        line-height: 1.6;
+        color: #333;
+        background-color: white;
+        min-height: 100vh;
+        position: relative;
+      }
+
+      /* Navigation styles */
+      nav {
+        position: absolute;
+        width: 100%;
+        z-index: 100;
+        padding: 1.5rem;
+        top: 0;
+        left: 0;
+      }
+
+      .nav-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        text-decoration: none;
+      }
+
+      .logo img {
+        height: 60px;
+        width: auto;
+        vertical-align: middle;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 2rem;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: #1a1a1a;
+        font-weight: 600;
+        transition: all 0.2s;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+      }
+
+      .nav-links a:hover {
+        background: rgba(0, 0, 0, 0.05);
+      }
+
+      /* Active page indicator */
+      .nav-links .active-page {
+        background: rgba(0, 0, 0, 0.1);
+        color: #1a1a1a;
+        font-weight: 700;
+      }
+
+      .nav-links .active-page:hover {
+        background: rgba(0, 0, 0, 0.15);
+      }
+
+      /* Footer Styles */
+      footer {
+        background: #f8f9fa;
+        padding: 4rem 2rem 2rem;
+        margin-top: auto;
+        border-top: 1px solid #eee;
+      }
+
+      .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .footer-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 2rem;
+        margin-bottom: 3rem;
+      }
+
+      .footer-section h4 {
+        color: #1a1a1a;
+        margin-bottom: 1rem;
+        font-size: 1.1rem;
+      }
+
+      .footer-section ul {
+        list-style: none;
+      }
+
+      .footer-section ul li {
+        margin-bottom: 0.5rem;
+      }
+
+      .footer-section ul li a {
+        color: #666;
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+
+      .footer-section ul li a:hover {
+        color: #1a73e8;
+      }
+
+      .social-links {
+        display: flex;
+        gap: 1rem;
+      }
+
+      .social-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: #fff;
+        transition: transform 0.2s;
+      }
+
+      .social-icon:hover {
+        transform: translateY(-2px);
+      }
+
+      .social-icon img {
+        width: 20px;
+        height: 20px;
+        filter: invert(20%);
+      }
+
+      .footer-bottom {
+        padding-top: 2rem;
+        border-top: 1px solid #eee;
+        text-align: center;
+        color: #666;
+        font-size: 0.9rem;
+      }
+
+      .footer-bottom p {
+        margin-bottom: 0.5rem;
+      }
+
+      /* Hamburger Menu Styles */
+      .hamburger {
+        display: none;
+        cursor: pointer;
+        padding: 0.5rem;
+        position: relative;
+        margin-left: auto;
+        width: 25px;
+        height: 21px;
+      }
+
+      .hamburger span {
+        display: block;
+        width: 25px;
+        height: 3px;
+        background-color: #1a1a1a;
+        margin: 5px 0;
+        transition: all 0.3s ease;
+        position: absolute;
+        left: 0;
+      }
+
+      .hamburger span:nth-child(1) {
+        top: 0;
+      }
+      .hamburger span:nth-child(2) {
+        top: 9px;
+      }
+      .hamburger span:nth-child(3) {
+        top: 18px;
+      }
+
+      /* Mobile Navigation */
+      @media (max-width: 768px) {
+        .hamburger {
+          display: block;
+          z-index: 101;
+        }
+
+        .nav-links {
+          position: fixed;
+          top: 0;
+          right: -100%;
+          width: 70%;
+          height: 100vh;
+          background: rgba(255, 255, 255, 0.3);
+          backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          z-index: 100;
+          transition: right 0.3s ease;
+          border-left: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .nav-links.active {
+          right: 0;
+        }
+
+        .nav-links a {
+          color: #1a1a1a;
+          margin: 1.5rem 0;
+          font-size: 1.2rem;
+          font-weight: 600;
+          padding: 0.5rem 2rem;
+          border-radius: 4px;
+          transition: all 0.2s ease;
+        }
+
+        .nav-links a:hover {
+          color: #1a1a1a;
+          background: rgba(0, 0, 0, 0.05);
+        }
+
+        /* Hamburger Animation */
+        .hamburger.active span:nth-child(1) {
+          transform: translateY(9px) rotate(45deg);
+        }
+
+        .hamburger.active span:nth-child(2) {
+          opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+          transform: translateY(-9px) rotate(-45deg);
+        }
+      }
+
+      /* Add these styles after the navigation styles */
+      .apply-container {
+        position: relative;
+        top: 80px;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+        min-height: calc(100vh - 120px);
+        margin-bottom: 12rem;
+      }
+
+      .apply-header {
+        text-align: center;
+        padding-top: 3rem;
+        margin-bottom: 3rem;
+      }
+
+      .apply-header h1 {
+        font-size: 2.5rem;
+        color: #1a1a1a;
+        margin-bottom: 1rem;
+      }
+
+      .discord-login {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 2rem;
+      }
+
+      .login-card {
+        background: white;
+        padding: 3rem;
+        border-radius: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        max-width: 400px;
+        width: 100%;
+      }
+
+      .discord-icon {
+        width: 48px;
+        height: 48px;
+        margin-bottom: 1.5rem;
+        filter: invert(20%);
+      }
+
+      .login-card h2 {
+        color: #1a1a1a;
+        margin-bottom: 1rem;
+        font-size: 1.8rem;
+      }
+
+      .login-card p {
+        color: #666;
+        margin-bottom: 2rem;
+      }
+
+      .discord-button {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 1rem 2rem;
+        background: #5865f2;
+        color: white;
+        text-decoration: none;
+        border-radius: 4px;
+        font-weight: 700;
+        transition: background 0.2s;
+        width: 100%;
+        justify-content: center;
+        font-size: 1.1rem;
+      }
+
+      .discord-button:hover {
+        background: #4752c4;
+      }
+
+      .discord-button img {
+        width: 24px;
+        height: 24px;
+        filter: invert(1);
+      }
+
+      /* Responsive design for the login card */
+      @media (max-width: 768px) {
+        .login-card {
+          padding: 2rem;
+          margin: 0 1rem;
+        }
+      }
+
+      /* Update existing styles */
+      .positions-grid {
+        display: flex;
+        justify-content: space-between;
+        align-items: stretch;
+        padding: 2rem;
+        gap: 2rem;
+        flex-wrap: wrap;
+      }
+
+      .position-card {
+        background: white;
+        padding: 3rem;
+        border-radius: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        flex: 1;
+        min-width: 300px;
+        width: 100%;
+        transition: transform 0.2s;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .position-card:hover {
+        transform: translateY(-5px);
+      }
+
+      .position-card h2 {
+        color: #1a73e8;
+        margin-bottom: 1rem;
+        font-size: 1.8rem;
+      }
+
+      .position-card p {
+        color: #666;
+        margin-bottom: 1.5rem;
+      }
+
+      .position-card ul {
+        list-style: none;
+        margin-bottom: 2rem;
+        text-align: left;
+        padding: 0 1rem;
+      }
+
+      .position-card ul li {
+        color: #666;
+        margin-bottom: 0.5rem;
+        padding-left: 1.5rem;
+        position: relative;
+      }
+
+      .position-card ul li::before {
+        content: '•';
+        color: #1a73e8;
+        position: absolute;
+        left: 0;
+      }
+
+      /* Update responsive design */
+      @media (max-width: 768px) {
+        .position-card {
+          padding: 2rem;
+          margin: 0 1rem;
+          min-width: 100%;
+        }
+      }
+
+      .position-card.disabled {
+        opacity: 0.6;
+        pointer-events: none;
+        position: relative;
+      }
+
+      .position-card.disabled::after {
+        content: 'Application Closed';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: rgba(0, 0, 0, 0.7);
+        color: white;
+        padding: 1rem 2rem;
+        border-radius: 4px;
+        font-weight: 500;
+        font-size: 1.2rem;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div class="nav-content">
+        <a href="../index.html" class="logo">
+          <img src="../assets/tgn-logo.png" alt="The Globe Network Logo" />
+        </a>
+        <div class="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <div class="nav-links">
+          <a href="../index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="servers.html">Servers</a>
+          <a href="apply.html" class="active-page">Apply</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="apply-container">
+      <div class="apply-header">
+        <h1>Join Our Team</h1>
+        <p>Choose a position and start your journey with The Globe Network</p>
+      </div>
+
+      <div class="positions-grid">
+        <div class="position-card disabled">
+          <h2>Media Team</h2>
+          <p>
+            Create and manage content for our social media platforms and help
+            grow our community.
+          </p>
+          <ul>
+            <li>Create promotional content</li>
+            <li>Manage social media accounts</li>
+            <li>Design graphics and videos</li>
+            <li>Plan marketing strategies</li>
+          </ul>
+          <a href="#" class="discord-button" id="media-login">
+            <img
+              src="https://cdn.jsdelivr.net/npm/simple-icons@v5/icons/discord.svg"
+              alt="Discord"
+            />
+            Apply for Media Team
+          </a>
+        </div>
+
+        <div class="position-card">
+          <h2>Staff Team</h2>
+          <p>
+            Join our moderation team to help maintain order and ensure a
+            positive gaming experience for all players.
+          </p>
+          <ul>
+            <li>Moderate in-game activities</li>
+            <li>Handle player reports</li>
+            <li>Enforce server rules</li>
+            <li>Assist players with queries</li>
+          </ul>
+          <a
+            href="#"
+            class="discord-button"
+            id="staff-login"
+            onclick="redirectToDiscordAuth()"
+          >
+            <img
+              src="https://cdn.jsdelivr.net/npm/simple-icons@v5/icons/discord.svg"
+              alt="Discord"
+            />
+            Apply for Staff Team
+          </a>
+        </div>
+
+        <div class="position-card disabled">
+          <h2>Events Team</h2>
+          <p>
+            Plan and organize engaging events for our community to participate
+            in and enjoy.
+          </p>
+          <ul>
+            <li>Plan community events</li>
+            <li>Coordinate with other teams</li>
+            <li>Host special activities</li>
+            <li>Create event documentation</li>
+          </ul>
+          <a href="#" class="discord-button" id="events-login">
+            <img
+              src="https://cdn.jsdelivr.net/npm/simple-icons@v5/icons/discord.svg"
+              alt="Discord"
+            />
+            Apply for Events Team
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <script src="../js/components.js"></script>
+    <script>
+      function redirectToDiscordAuth() {
+        const CLIENT_ID = '1206384183681744968';
+        const REDIRECT_URI = encodeURIComponent(
+          'http://127.0.0.1:5500/pages/applications/staff.html'
+        );
+        const SCOPE = 'identify email guilds';
+
+        const discordAuthUrl = `https://discord.com/api/oauth2/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code&scope=${SCOPE}`;
+
+        // Open in new tab instead of current window
+        window.open(discordAuthUrl, '_blank');
+      }
+
+      document.addEventListener('DOMContentLoaded', function () {
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        const links = document.querySelectorAll('.nav-links a');
+
+        hamburger.addEventListener('click', () => {
+          hamburger.classList.toggle('active');
+          navLinks.classList.toggle('active');
+        });
+
+        links.forEach((link) => {
+          link.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            navLinks.classList.remove('active');
+          });
+        });
+      });
+
+      document.addEventListener('DOMContentLoaded', () => {
+        Components.loadFooter();
+      });
+    </script>
+  </body>
+</html>

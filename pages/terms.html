@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Terms of Service | The Globe Network</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+      }
+
+      body {
+        line-height: 1.6;
+        color: #333;
+        background-color: white;
+        min-height: 100vh;
+        position: relative;
+      }
+
+      /* Navigation styles */
+      nav {
+        position: absolute;
+        width: 100%;
+        z-index: 100;
+        padding: 1.5rem;
+        top: 0;
+        left: 0;
+      }
+
+      .nav-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        text-decoration: none;
+      }
+
+      .logo img {
+        height: 60px;
+        width: auto;
+        vertical-align: middle;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 2rem;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: #1a1a1a;
+        font-weight: 700;
+        transition: all 0.2s;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+      }
+
+      .nav-links a:hover {
+        background: rgba(0, 0, 0, 0.05);
+      }
+
+      /* Terms of Service specific styles */
+      .terms-container {
+        position: relative;
+        top: 80px;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+        min-height: calc(100vh - 120px);
+        margin-bottom: 12rem;
+      }
+
+      .terms-header {
+        text-align: center;
+        padding-top: 3rem;
+        margin-bottom: 3rem;
+      }
+
+      .terms-header h1 {
+        font-size: 2.5rem;
+        color: #1a1a1a;
+        margin-bottom: 1rem;
+      }
+
+      .terms-content {
+        background: white;
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .terms-section {
+        margin-bottom: 2rem;
+      }
+
+      .terms-section h2 {
+        color: #1a1a1a;
+        margin-bottom: 1rem;
+        font-size: 1.5rem;
+      }
+
+      .terms-section p {
+        margin-bottom: 1rem;
+        color: #666;
+      }
+
+      .terms-section ul {
+        margin-bottom: 1rem;
+        padding-left: 1.5rem;
+        color: #666;
+      }
+
+      .terms-section li {
+        margin-bottom: 0.5rem;
+      }
+
+      /* Mobile Menu Styles */
+      .hamburger {
+        display: none;
+        cursor: pointer;
+        padding: 0.5rem;
+        position: relative;
+        margin-left: auto;
+        width: 25px;
+        height: 21px;
+      }
+
+      .hamburger span {
+        display: block;
+        width: 25px;
+        height: 3px;
+        background-color: #1a1a1a;
+        margin: 5px 0;
+        transition: all 0.3s ease;
+        position: absolute;
+        left: 0;
+      }
+
+      .hamburger span:nth-child(1) {
+        top: 0;
+      }
+      .hamburger span:nth-child(2) {
+        top: 9px;
+      }
+      .hamburger span:nth-child(3) {
+        top: 18px;
+      }
+
+      @media (max-width: 768px) {
+        .nav-links {
+          position: fixed;
+          top: 0;
+          right: -100%;
+          width: 70%;
+          height: 100vh;
+          background: rgba(255, 255, 255, 0.3);
+          backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          z-index: 100;
+          transition: right 0.3s ease;
+          border-left: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .hamburger {
+          display: block;
+          z-index: 101;
+        }
+
+        .hamburger.active {
+          position: fixed;
+          top: 1.5rem;
+          right: 1.5rem;
+        }
+
+        .nav-links.active {
+          right: 0;
+        }
+
+        .nav-links a {
+          color: #1a1a1a;
+          margin: 1.5rem 0;
+          font-size: 1.2rem;
+          font-weight: 600;
+          padding: 0.5rem 2rem;
+          border-radius: 4px;
+        }
+
+        .hamburger.active span:nth-child(1) {
+          transform: translateY(9px) rotate(45deg);
+        }
+
+        .hamburger.active span:nth-child(2) {
+          opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+          transform: translateY(-9px) rotate(-45deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div class="nav-content">
+        <a href="../index.html" class="logo">
+          <img src="../assets/tgn-logo.png" alt="The Globe Network Logo" />
+        </a>
+        <div class="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <div class="nav-links">
+          <a href="../index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="servers.html">Servers</a>
+          <a href="apply.html">Apply</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="terms-container">
+      <div class="terms-header">
+        <h1>Terms of Service</h1>
+        <p>Last updated: Janurary 2025</p>
+      </div>
+
+      <div class="terms-content">
+        <div class="terms-section">
+          <h2>1. Acceptance of Terms</h2>
+          <p>
+            By accessing and using The Globe Network's services, including our
+            ERLC servers and Discord community, you agree to be bound by these
+            Terms of Service. If you do not agree to these terms, please do not
+            use our services.
+          </p>
+        </div>
+
+        <div class="terms-section">
+          <h2>2. User Conduct</h2>
+          <p>Users of The Globe Network must:</p>
+          <ul>
+            <li>Follow all server rules and guidelines</li>
+            <li>Maintain appropriate roleplay conduct</li>
+            <li>Respect all staff members and other players</li>
+            <li>Not engage in any form of harassment or discrimination</li>
+            <li>Not exploit bugs or glitches</li>
+            <li>Not use any unauthorized modifications or cheats</li>
+          </ul>
+        </div>
+
+        <div class="terms-section">
+          <h2>3. Age Requirements</h2>
+          <p>
+            While our ERLC servers are open to players of all ages, our Discord
+            server requires users to be 13 years or older, in compliance with
+            <a href="https://discord.com/terms" target="_blank"
+              >Discord's Terms of Service</a
+            >.
+          </p>
+        </div>
+
+        <div class="terms-section">
+          <h2>4. Disciplinary Actions</h2>
+          <p>
+            The Globe Network reserves the right to take appropriate
+            disciplinary action against users who violate these terms, including
+            but not limited to:
+          </p>
+          <ul>
+            <li>Verbal warnings</li>
+            <li>Temporary suspension</li>
+            <li>Permanent ban from servers</li>
+            <li>Removal from Discord community</li>
+          </ul>
+        </div>
+
+        <div class="terms-section">
+          <h2>5. Content and Intellectual Property</h2>
+          <p>
+            All content related to The Globe Network, including but not limited
+            to logos, graphics, and server configurations, is protected by
+            intellectual property rights. Users may not reproduce or distribute
+            this content without explicit permission.
+          </p>
+        </div>
+
+        <div class="terms-section">
+          <h2>6. Privacy</h2>
+          <p>
+            Your use of our services is also governed by our Privacy Policy.
+            Please review our <a href="privacy.html">Privacy Policy</a> to
+            understand how we collect and use your information.
+          </p>
+        </div>
+
+        <div class="terms-section">
+          <h2>7. Modifications to Service</h2>
+          <p>
+            The Globe Network reserves the right to modify or discontinue any
+            aspect of our services at any time. We will make reasonable efforts
+            to notify users of significant changes.
+          </p>
+        </div>
+
+        <div class="terms-section">
+          <h2>8. Disclaimer</h2>
+          <p>
+            The Globe Network is not affiliated with Emergency Response: Liberty
+            County or Roblox. We provide our services "as is" without any
+            warranties, express or implied.
+          </p>
+        </div>
+
+        <div class="terms-section">
+          <h2>9. Contact</h2>
+          <p>
+            If you have any questions about these Terms of Service, please
+            contact us through our Discord server or visit our
+            <a href="contact.html">Contact page</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <script src="../js/components.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        Components.loadFooter();
+      });
+    </script>
+  </body>
+</html>

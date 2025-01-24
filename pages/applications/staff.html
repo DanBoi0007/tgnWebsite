@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Staff Application | The Globe Network</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      }
+
+      body {
+        line-height: 1.6;
+        color: #333;
+        background-color: white;
+        min-height: 100vh;
+        position: relative;
+      }
+
+      .application-container {
+        position: relative;
+        top: 40px;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+        min-height: calc(100vh - 120px);
+        margin-bottom: 6rem;
+      }
+
+      .application-header {
+        text-align: center;
+        padding-top: 1.5rem;
+        margin-bottom: 3rem;
+      }
+
+      .application-header h1 {
+        font-size: 2.5rem;
+        color: #1a1a1a;
+        margin-bottom: 1rem;
+      }
+
+      .application-form {
+        display: none;
+        background: white;
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .form-group {
+        margin-bottom: 1.5rem;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+        color: #1a1a1a;
+      }
+
+      .form-group input,
+      .form-group textarea,
+      .form-group select {
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 1rem;
+      }
+
+      .form-group textarea {
+        min-height: 120px;
+        resize: vertical;
+      }
+
+      .char-count {
+        margin-top: 0.5rem;
+        color: #666;
+        font-size: 0.9rem;
+        text-align: right;
+      }
+
+      .char-count.invalid {
+        color: #dc3545;
+      }
+
+      .char-count.valid {
+        color: #198754;
+      }
+
+      .submit-button {
+        background: #1a73e8;
+        color: white;
+        padding: 1rem 2rem;
+        border: none;
+        border-radius: 4px;
+        font-size: 1.1rem;
+        font-weight: 500;
+        cursor: pointer;
+        width: 100%;
+        transition: background 0.2s;
+        margin-top: 2rem;
+        display: block;
+      }
+
+      .submit-button:hover {
+        background: #1557b0;
+      }
+
+      /* Add this new style for required field indicators */
+      .required::after {
+        content: '*';
+        color: #dc3545;
+        margin-left: 4px;
+      }
+
+      /* Include your existing navigation and footer styles here */
+
+      /* Simple footer styles */
+      .footer-bottom {
+        text-align: center;
+        padding: 1.5rem;
+        background: #f8f9fa;
+        border-top: 1px solid #eee;
+        position: relative;
+        margin-top: auto;
+      }
+
+      .footer-bottom p {
+        color: #666;
+        font-size: 0.9rem;
+        margin: 0;
+      }
+
+      /* Add wrapper to ensure footer stays at bottom */
+      .page-wrapper {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .content-wrapper {
+        flex: 1;
+        margin-bottom: 2rem;
+      }
+
+      /* Add styles for rules section */
+      .note-text {
+        margin-bottom: 2rem;
+        color: #666;
+      }
+
+      .rules-section {
+        display: none;
+        background: white;
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin-bottom: 2rem;
+      }
+
+      .rules-section h2 {
+        color: #1a73e8;
+        margin-bottom: 1rem;
+        font-size: 2.2rem;
+      }
+
+      .rules-section h3 {
+        color: #1a1a1a;
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .rule-item {
+        margin-bottom: 1rem;
+        position: relative;
+        line-height: 1.5;
+      }
+
+      .continue-button {
+        background: #1a73e8;
+        color: white;
+        padding: 1rem 2rem;
+        border: none;
+        border-radius: 4px;
+        font-size: 1.1rem;
+        font-weight: 500;
+        cursor: pointer;
+        width: 100%;
+        transition: background 0.2s;
+        margin-top: 1rem;
+      }
+
+      .continue-button:hover {
+        background: #1557b0;
+      }
+
+      /* Add styles for form sections */
+      .back-button {
+        margin-bottom: 2rem;
+      }
+
+      .back-button a {
+        color: #666;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        font-size: 1.1rem;
+      }
+
+      .back-button a:hover {
+        color: #1a73e8;
+      }
+
+      .form-section {
+        display: none;
+        margin-bottom: 3rem;
+      }
+
+      .form-section.active {
+        display: block;
+      }
+
+      .section-navigation {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        margin-top: 2rem;
+      }
+
+      .nav-buttons {
+        display: flex;
+        gap: 1rem;
+        justify-content: space-between;
+      }
+
+      .nav-button {
+        background: #1a73e8;
+        color: white;
+        padding: 0.75rem 1.5rem;
+        border: none;
+        border-radius: 4px;
+        font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+
+      .nav-button:hover {
+        background: #1557b0;
+      }
+
+      .nav-button.previous {
+        background: #6c757d;
+      }
+
+      .nav-button.previous:hover {
+        background: #5a6268;
+      }
+
+      .form-section h2 {
+        color: #1a1a1a;
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+      }
+
+      .section-description {
+        color: #666;
+        margin-bottom: 1rem;
+        font-size: 1.1rem;
+      }
+
+      .section-divider {
+        border: 0;
+        height: 1px;
+        background: #ddd;
+        margin-bottom: 2rem;
+      }
+
+      .radio-group {
+        display: flex;
+        gap: 2rem;
+        margin-top: 0.5rem;
+      }
+
+      .radio-label {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        cursor: pointer;
+      }
+
+      .radio-label input[type='radio'] {
+        width: auto;
+        margin-right: 0.5rem;
+      }
+
+      .form-group input[readonly] {
+        background-color: #f5f5f5;
+        cursor: not-allowed;
+        color: #666;
+      }
+
+      /* Date picker styles */
+      .date-input-container {
+        position: relative;
+        display: flex;
+        align-items: center;
+      }
+
+      .calendar-icon {
+        position: absolute;
+        right: 10px;
+        pointer-events: none;
+        width: 24px;
+        height: 24px;
+        padding: 2px;
+        color: #666;
+      }
+
+      .calendar-icon:hover {
+        color: #1a73e8;
+      }
+
+      /* Style the date input to look consistent across browsers */
+      input[type='date'] {
+        position: relative;
+        padding-right: 40px;
+      }
+
+      input[type='date']::-webkit-calendar-picker-indicator {
+        opacity: 0;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        cursor: pointer;
+      }
+
+      .button-divider {
+        border: 0;
+        height: 1px;
+        background: #ddd;
+        margin: 1rem 0;
+        opacity: 0.5;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page-wrapper">
+      <div class="content-wrapper">
+        <div class="application-container">
+          <div class="rules-section">
+            <h2>TGN | Staff Application</h2>
+            <p style="font-style: italic; margin-bottom: 2rem">
+              * This is a voluntary position that requires a professional
+              commitment to meeting our biweekly minimum hour requirement.
+            </p>
+            <h3 style="margin-bottom: 1rem">
+              Application Guidelines & Useful Information:
+            </h3>
+
+            <div class="rule-item">
+              1) The use of AI in answers is strictly prohibited, and will lead
+              to an <strong>instant denial</strong>.
+            </div>
+            <div class="rule-item">
+              2) Be <strong>truthful</strong> and <strong>accurate</strong> when
+              answering all questions in this application.
+            </div>
+            <div class="rule-item">
+              3) Applicants must be at least and must be at least
+              <strong>14+</strong> and must be at least
+              <strong>Network Level 10</strong> in our discord server. (User
+              /rank in our server to find your rank)
+            </div>
+            <div class="rule-item">
+              4) Make sure to put <strong>effort</strong> into applications, low
+              effort applications will not be considered.
+            </div>
+            <div class="rule-item">
+              5) Do not message application reviews to ask about your
+              application or it will be <strong>instantly denied</strong>.
+            </div>
+            <div class="rule-item">
+              6) Make sure to understand what role you are applying for. This
+              role is <strong>unpaid</strong> and will require a biweekly hour
+              requirement of <strong>8+ hours</strong> (<strong
+                >4+ hours weekly</strong
+              >
+              - hour requirements will change when moving ranks)
+            </div>
+            <div class="rule-item">
+              7) Applicants must have a
+              <strong>clean punishment record</strong> for at least 2 weeks
+              before applying.
+            </div>
+
+            <button class="continue-button" onclick="showApplicationForm()">
+              I Understand - Continue to Application
+            </button>
+          </div>
+
+          <div class="application-form">
+            <div class="back-button" id="back-button">
+              <a href="#" onclick="handleBack(event)">← Back</a>
+            </div>
+
+            <form id="staff-application-form">
+              <div class="form-section active" data-section="1">
+                <h2>Basic Information</h2>
+                <p class="section-description">
+                  <em
+                    >This section will be information about you. Do NOT use any
+                    roleplay information in your answers.</em
+                  >
+                </p>
+                <hr class="section-divider" />
+
+                <div class="form-group">
+                  <label for="discord-id" class="required"
+                    >Your Discord UserId</label
+                  >
+                  <input
+                    type="text"
+                    id="discord-id"
+                    required
+                    placeholder="Auto-filled from Discord login"
+                    readonly
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="roblox-id" class="required"
+                    >Your Roblox UserId</label
+                  >
+                  <input
+                    type="text"
+                    id="roblox-id"
+                    required
+                    placeholder="e.g. 27355497"
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="dob" class="required"
+                    >What is your Date of Birth?</label
+                  >
+                  <div class="date-input-container">
+                    <input
+                      type="date"
+                      id="dob"
+                      required
+                      max="2010-12-31"
+                      min="1920-01-01"
+                      onchange="formatDate(this.value)"
+                    />
+                    <svg
+                      class="calendar-icon"
+                      viewBox="0 0 24 24"
+                      onclick="document.getElementById('dob').showPicker()"
+                    >
+                      <path
+                        fill="currentColor"
+                        d="M19,4H17V3a1,1,0,0,0-2,0V4H9V3A1,1,0,0,0,7,3V4H5A2,2,0,0,0,3,6V20a2,2,0,0,0,2,2H19a2,2,0,0,0,2-2V6A2,2,0,0,0,19,4Zm0,16H5V10H19ZM19,8H5V6H7V7A1,1,0,0,0,9,7V6h6V7a1,1,0,0,0,2,0V6h2Z"
+                      />
+                    </svg>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="english" class="required"
+                    >Can you speak fluent English?</label
+                  >
+                  <div class="radio-group">
+                    <label class="radio-label">
+                      <input type="radio" name="english" value="yes" required />
+                      Yes
+                    </label>
+                    <label class="radio-label">
+                      <input type="radio" name="english" value="no" />
+                      No
+                    </label>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="microphone" class="required"
+                    >Do you have a Working & Clear Microphone?</label
+                  >
+                  <div class="radio-group">
+                    <label class="radio-label">
+                      <input
+                        type="radio"
+                        name="microphone"
+                        value="yes"
+                        required
+                      />
+                      Yes
+                    </label>
+                    <label class="radio-label">
+                      <input type="radio" name="microphone" value="no" />
+                      No
+                    </label>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="voice-call" class="required"
+                    >Are you comfortable speaking in a Staff Voice Call?</label
+                  >
+                  <div class="radio-group">
+                    <label class="radio-label">
+                      <input
+                        type="radio"
+                        name="voice-call"
+                        value="yes"
+                        required
+                      />
+                      Yes
+                    </label>
+                    <label class="radio-label">
+                      <input type="radio" name="voice-call" value="no" />
+                      No
+                    </label>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="timezone" class="required"
+                    >What is your current Timezone?</label
+                  >
+                  <input
+                    type="text"
+                    id="timezone"
+                    required
+                    placeholder="e.g. GMT"
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="network-level" class="required"
+                    >What is your current Network Level?</label
+                  >
+                  <input
+                    type="text"
+                    id="network-level"
+                    required
+                    placeholder="e.g. Network Level 10"
+                  />
+                </div>
+
+                <div class="section-navigation">
+                  <hr class="button-divider" />
+                  <div class="nav-buttons">
+                    <button
+                      type="button"
+                      class="nav-button next"
+                      onclick="nextSection(1)"
+                    >
+                      Next Section
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-section" data-section="2">
+                <h2>Moderation Questions</h2>
+                <p class="section-description">
+                  <em
+                    >This section will be about the server and why we should
+                    pick you. Be honest in your answers.</em
+                  >
+                </p>
+                <hr class="section-divider" />
+
+                <div class="form-group">
+                  <label for="why-staff" class="required"
+                    >Why do you want to become a staff member?</label
+                  >
+                  <textarea
+                    id="why-staff"
+                    required
+                    placeholder="Minimum 150 characters"
+                    minlength="150"
+                    onkeyup="updateCharCount(this, 'why-staff-count')"
+                  ></textarea>
+                  <div class="char-count" id="why-staff-count">
+                    0/150 characters
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="previous-experience" class="required"
+                    >Have you ever held a staff position in another ERLC
+                    roleplay community? If yes, explain your experience and
+                    role.</label
+                  >
+                  <textarea
+                    id="previous-experience"
+                    required
+                    placeholder="Minimum 150 characters"
+                    minlength="150"
+                    onkeyup="updateCharCount(this, 'experience-count')"
+                  ></textarea>
+                  <div class="char-count" id="experience-count">
+                    0/150 characters
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="enjoy-most" class="required"
+                    >What do you enjoy most about roleplaying on our
+                    servers?</label
+                  >
+                  <textarea
+                    id="enjoy-most"
+                    required
+                    placeholder="Minimum 150 characters"
+                    minlength="150"
+                    onkeyup="updateCharCount(this, 'enjoy-count')"
+                  ></textarea>
+                  <div class="char-count" id="enjoy-count">
+                    0/150 characters
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="good-fit" class="required"
+                    >Why do you think you would be a good fit for our Staff
+                    Team?</label
+                  >
+                  <textarea
+                    id="good-fit"
+                    required
+                    placeholder="Minimum 150 characters"
+                    minlength="150"
+                    onkeyup="updateCharCount(this, 'fit-count')"
+                  ></textarea>
+                  <div class="char-count" id="fit-count">0/150 characters</div>
+                </div>
+
+                <div class="section-navigation">
+                  <hr class="button-divider" />
+                  <div class="nav-buttons">
+                    <button
+                      type="button"
+                      class="nav-button next"
+                      onclick="nextSection(2)"
+                    >
+                      Next Section
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-section" data-section="3">
+                <h2>Agreements</h2>
+                <p class="section-description">
+                  <em
+                    >This is the final section for the staff application, it
+                    will mostly be multiple choice questions. Good luck with
+                    your application.</em
+                  >
+                </p>
+                <hr class="section-divider" />
+
+                <div class="form-group">
+                  <label for="promotions" class="required"
+                    >Do you agree to handle Promotions/Demotions
+                    professionally?</label
+                  >
+                  <div class="radio-group">
+                    <label class="radio-label">
+                      <input
+                        type="radio"
+                        name="promotions"
+                        value="yes"
+                        required
+                      />
+                      Yes
+                    </label>
+                    <label class="radio-label">
+                      <input type="radio" name="promotions" value="no" />
+                      No
+                    </label>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="mod-calls" class="required"
+                    >Do you agree to handle Mod Call's Professionally?</label
+                  >
+                  <div class="radio-group">
+                    <label class="radio-label">
+                      <input
+                        type="radio"
+                        name="mod-calls"
+                        value="yes"
+                        required
+                      />
+                      Yes
+                    </label>
+                    <label class="radio-label">
+                      <input type="radio" name="mod-calls" value="no" />
+                      No
+                    </label>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="respect-role" class="required"
+                    >Do you agree to treat your role with respect?</label
+                  >
+                  <div class="radio-group">
+                    <label class="radio-label">
+                      <input
+                        type="radio"
+                        name="respect-role"
+                        value="yes"
+                        required
+                      />
+                      Yes
+                    </label>
+                    <label class="radio-label">
+                      <input type="radio" name="respect-role" value="no" />
+                      No
+                    </label>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="higher-standard" class="required"
+                    >Do you understand that, as staff, you will be held at a
+                    higher standard and are expected to follow all server
+                    rules?</label
+                  >
+                  <div class="radio-group">
+                    <label class="radio-label">
+                      <input
+                        type="radio"
+                        name="higher-standard"
+                        value="yes"
+                        required
+                      />
+                      Yes
+                    </label>
+                    <label class="radio-label">
+                      <input type="radio" name="higher-standard" value="no" />
+                      No
+                    </label>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="feedback" class="required"
+                    >Will you accept constructive feedback and work on improving
+                    your staffing skills?</label
+                  >
+                  <div class="radio-group">
+                    <label class="radio-label">
+                      <input
+                        type="radio"
+                        name="feedback"
+                        value="yes"
+                        required
+                      />
+                      Yes
+                    </label>
+                    <label class="radio-label">
+                      <input type="radio" name="feedback" value="no" />
+                      No
+                    </label>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="hour-requirement" class="required"
+                    >Do you understand that if you do not meet the hour
+                    requirement for more than 3 biweekly periods, without prior
+                    accepted reasons, you will be removed from the team?</label
+                  >
+                  <div class="radio-group">
+                    <label class="radio-label">
+                      <input
+                        type="radio"
+                        name="hour-requirement"
+                        value="yes"
+                        required
+                      />
+                      Yes
+                    </label>
+                    <label class="radio-label">
+                      <input type="radio" name="hour-requirement" value="no" />
+                      No
+                    </label>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="meetings" class="required"
+                    >Will you be able to attend our biweekly staff
+                    meetings?</label
+                  >
+                  <div class="radio-group">
+                    <label class="radio-label">
+                      <input
+                        type="radio"
+                        name="meetings"
+                        value="yes"
+                        required
+                      />
+                      Yes
+                    </label>
+                    <label class="radio-label">
+                      <input type="radio" name="meetings" value="no" />
+                      No
+                    </label>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="contact-policy" class="required"
+                    >Do you understand that contacting anyone about your
+                    application process, you will be instantly denied?</label
+                  >
+                  <div class="radio-group">
+                    <label class="radio-label">
+                      <input
+                        type="radio"
+                        name="contact-policy"
+                        value="yes"
+                        required
+                      />
+                      Yes
+                    </label>
+                    <label class="radio-label">
+                      <input type="radio" name="contact-policy" value="no" />
+                      No
+                    </label>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="additional-questions"
+                    >Do you have any other questions or concerns?</label
+                  >
+                  <textarea
+                    id="additional-questions"
+                    placeholder="Optional - Enter any questions or concerns here"
+                  ></textarea>
+                </div>
+
+                <div class="section-navigation">
+                  <hr class="button-divider" />
+                  <div class="nav-buttons">
+                    <button type="submit" class="submit-button">
+                      Finish & Submit →
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 The Globe Network. All rights reserved.</p>
+        <div class="social-links">
+          <a
+            href="https://discord.com/invite/BQ3D9ThAyw"
+            target="_blank"
+            class="social-icon"
+          >
+            <img
+              src="https://cdn.jsdelivr.net/npm/simple-icons@v5/icons/discord.svg"
+              alt="Discord"
+            />
+          </a>
+          <a href="#" target="_blank" class="social-icon">
+            <img
+              src="https://cdn.jsdelivr.net/npm/simple-icons@v5/icons/twitter.svg"
+              alt="Twitter"
+            />
+          </a>
+          <a href="#" target="_blank" class="social-icon">
+            <img
+              src="https://cdn.jsdelivr.net/npm/simple-icons@v5/icons/youtube.svg"
+              alt="YouTube"
+            />
+          </a>
+          <a href="#" target="_blank" class="social-icon">
+            <img
+              src="https://cdn.jsdelivr.net/npm/simple-icons@v5/icons/tiktok.svg"
+              alt="TikTok"
+            />
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function updateCharCount(textarea, counterId) {
+        const minLength = parseInt(textarea.getAttribute('minlength'));
+        const count = textarea.value.length;
+        const countElement = document.getElementById(counterId);
+        countElement.textContent = `${count}/${minLength} characters`;
+
+        if (count < minLength) {
+          countElement.classList.remove('valid');
+          countElement.classList.add('invalid');
+        } else {
+          countElement.classList.remove('invalid');
+          countElement.classList.add('valid');
+        }
+      }
+
+      function formatDate(value) {
+        if (!value) return;
+        const date = new Date(value);
+        const formatted = date.toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'short',
+          day: 'numeric',
+        });
+        document
+          .getElementById('dob')
+          .setAttribute('data-formatted', formatted);
+      }
+
+      // Check for Discord OAuth code in URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const code = urlParams.get('code');
+
+      if (code) {
+        // Store the code temporarily
+        sessionStorage.setItem('discord_auth_code', code);
+
+        // Send code to our backend
+        fetch('http://localhost:3000/api/discord/token', {
+          method: 'POST',
+          body: JSON.stringify({ code }),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            // Pre-fill the Discord ID field
+            const discordIdInput = document.getElementById('discord-id');
+            // Only set value if userId is valid and not undefined
+            if (data.userId && data.userId !== 'undefined') {
+              discordIdInput.value = data.userId;
+              discordIdInput.readOnly = true;
+            } else {
+              discordIdInput.readOnly = false;
+              discordIdInput.placeholder = 'e.g. 1206384183681744968';
+            }
+          })
+          .catch((error) => {
+            console.error('Error:', error);
+            // Make input editable if there was an error
+            const discordIdInput = document.getElementById('discord-id');
+            discordIdInput.readOnly = false;
+            discordIdInput.placeholder = 'e.g. 1206384183681744968';
+          });
+
+        // Show the rules section
+        document.querySelector('.rules-section').style.display = 'block';
+      } else {
+        // If no code, redirect back to apply page
+        window.location.href = '../apply.html';
+      }
+
+      function showApplicationForm() {
+        document.querySelector('.rules-section').style.display = 'none';
+        document.querySelector('.application-form').style.display = 'block';
+      }
+
+      function generateSubmissionId() {
+        // Generate a random 8-character alphanumeric ID
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        let id = '';
+        for (let i = 0; i < 8; i++) {
+          id += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+        return id;
+      }
+
+      document
+        .getElementById('staff-application-form')
+        .addEventListener('submit', async function (e) {
+          e.preventDefault();
+          const submissionId = generateSubmissionId();
+
+          // Collect all form data
+          const formData = {
+            submission_id: submissionId,
+            application_date: new Date().toISOString(),
+            discord_id: document.getElementById('discord-id').value,
+            roblox_id: document.getElementById('roblox-id').value,
+            date_of_birth: document.getElementById('dob').value,
+            speaks_english: document.querySelector(
+              'input[name="english"]:checked'
+            ).value,
+            has_microphone: document.querySelector(
+              'input[name="microphone"]:checked'
+            ).value,
+            voice_call_comfort: document.querySelector(
+              'input[name="voice-call"]:checked'
+            ).value,
+            timezone: document.getElementById('timezone').value,
+            network_level: document.getElementById('network-level').value,
+            why_staff: document.getElementById('why-staff').value,
+            previous_experience: document.getElementById('previous-experience')
+              .value,
+            enjoy_most: document.getElementById('enjoy-most').value,
+            good_fit: document.getElementById('good-fit').value,
+            handle_promotions: document.querySelector(
+              'input[name="promotions"]:checked'
+            ).value,
+            handle_mod_calls: document.querySelector(
+              'input[name="mod-calls"]:checked'
+            ).value,
+            respect_role: document.querySelector(
+              'input[name="respect-role"]:checked'
+            ).value,
+            higher_standard: document.querySelector(
+              'input[name="higher-standard"]:checked'
+            ).value,
+            accept_feedback: document.querySelector(
+              'input[name="feedback"]:checked'
+            ).value,
+            hour_requirement: document.querySelector(
+              'input[name="hour-requirement"]:checked'
+            ).value,
+            attend_meetings: document.querySelector(
+              'input[name="meetings"]:checked'
+            ).value,
+            contact_policy: document.querySelector(
+              'input[name="contact-policy"]:checked'
+            ).value,
+            additional_questions:
+              document.getElementById('additional-questions').value || 'N/A',
+          };
+
+          try {
+            // Flatten the formData object to match sheet columns
+            const flattenedData = {
+              'Submission ID': formData.submission_id,
+              'Application Date': formData.application_date,
+              'Your Discord UserId': formData.discord_id,
+              'Your Roblox UserId': formData.roblox_id,
+              'What is your Date of Birth?': formData.date_of_birth,
+              'Can you speak fluent English?': formData.speaks_english,
+              'Do you have a Working & Clear Microphone?':
+                formData.has_microphone,
+              'Are you comfortable speaking in a Staff Voice Call?':
+                formData.voice_call_comfort,
+              'What is your current Timezone?': formData.timezone,
+              'What is your current Network Level?': formData.network_level,
+              'Why do you want to become a staff member?': formData.why_staff,
+              'Have you ever held a staff position in another ERLC roleplay community? If yes, explain your experience and role.':
+                formData.previous_experience,
+              'What do you enjoy most about roleplaying on our servers?':
+                formData.enjoy_most,
+              'Why do you think you would be a good fit for our Staff Team?':
+                formData.good_fit,
+              'Do you agree to handle Promotions/Demotions professionally':
+                formData.handle_promotions,
+              "Do you agree to handle Mod Call's Professionally?":
+                formData.handle_mod_calls,
+              'Do you agree to treat your role with respect?':
+                formData.respect_role,
+              'Do you understand that, as staff, you will be held at a higher standard and are expected to follow all server rules?':
+                formData.higher_standard,
+              'Will you accept constructive feedback and work on improving your staffing skills?':
+                formData.accept_feedback,
+              'Do you understand that if you do not meet the hour requirement for more than 3 biweekly periods, without prior accepted reasons, you will be removed from the team?':
+                formData.hour_requirement,
+              'Will you be able to attend our biweekly staff meetings?':
+                formData.attend_meetings,
+              'Do you understand that contacting anyone about your application process, you will be instantly denied.':
+                formData.contact_policy,
+              'Do you have any other questions or concerns?':
+                formData.additional_questions,
+            };
+
+            // Send to SheetDB
+            const response = await fetch(
+              'https://sheetdb.io/api/v1/apsqamwz6hikp',
+              {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  Accept: 'application/json',
+                },
+                body: JSON.stringify({
+                  data: [flattenedData],
+                }),
+              }
+            );
+
+            const responseData = await response.json();
+
+            if (!response.ok) {
+              throw new Error(
+                `Failed to submit application: ${
+                  responseData.error || response.statusText
+                }`
+              );
+            }
+
+            console.log('Submission successful:', responseData);
+            // If successful, redirect to thank you page
+            window.location.href = './thank-you.html';
+          } catch (error) {
+            console.error('Error submitting application:', error);
+            alert(
+              `Error submitting application: ${error.message}. Please try again or contact support if the issue persists.`
+            );
+          }
+        });
+
+      function nextSection(currentSection) {
+        const currentSectionElement = document.querySelector(
+          `[data-section="${currentSection}"]`
+        );
+        const requiredFields =
+          currentSectionElement.querySelectorAll('[required]');
+
+        // Use HTML5 validation by checking validity of each field
+        let isValid = true;
+        requiredFields.forEach((field) => {
+          if (!field.reportValidity()) {
+            isValid = false;
+          }
+        });
+
+        if (!isValid) return;
+
+        // If all fields are valid, proceed to next section
+        currentSectionElement.classList.remove('active');
+        document
+          .querySelector(`[data-section="${currentSection + 1}"]`)
+          .classList.add('active');
+        window.scrollTo(0, 0);
+      }
+
+      function previousSection(currentSection) {
+        document
+          .querySelector(`[data-section="${currentSection}"]`)
+          .classList.remove('active');
+        document
+          .querySelector(`[data-section="${currentSection - 1}"]`)
+          .classList.add('active');
+        window.scrollTo(0, 0);
+      }
+
+      function handleBack(event) {
+        event.preventDefault();
+        const currentSection = document.querySelector('.form-section.active');
+        const sectionNumber = parseInt(currentSection.dataset.section);
+
+        if (sectionNumber > 1) {
+          // If we're beyond the first section, go back to previous section
+          previousSection(sectionNumber);
+        } else {
+          // If we're on the first section, go back to apply page
+          window.location.href = '../apply.html';
+        }
+      }
+    </script>
+  </body>
+</html>

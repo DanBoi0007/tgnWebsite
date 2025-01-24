@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Community Guidelines | The Globe Network</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+      }
+
+      body {
+        line-height: 1.6;
+        color: #333;
+        background-color: white;
+        min-height: 100vh;
+        position: relative;
+      }
+
+      /* Navigation styles */
+      nav {
+        position: absolute;
+        width: 100%;
+        z-index: 100;
+        padding: 1.5rem;
+        top: 0;
+        left: 0;
+      }
+
+      .nav-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        text-decoration: none;
+      }
+
+      .logo img {
+        height: 60px;
+        width: auto;
+        vertical-align: middle;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 2rem;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: #1a1a1a;
+        font-weight: 600;
+        transition: all 0.2s;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+      }
+
+      .nav-links a:hover {
+        background: rgba(0, 0, 0, 0.05);
+      }
+
+      /* Guidelines specific styles */
+      .guidelines-container {
+        position: relative;
+        top: 80px;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+        min-height: calc(100vh - 120px);
+        margin-bottom: 12rem;
+      }
+
+      .guidelines-header {
+        text-align: center;
+        padding-top: 3rem;
+        margin-bottom: 3rem;
+      }
+
+      .guidelines-header h1 {
+        font-size: 2.5rem;
+        color: #1a1a1a;
+        margin-bottom: 1rem;
+      }
+
+      .guidelines-content {
+        background: white;
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .guidelines-section {
+        margin-bottom: 2rem;
+      }
+
+      .guidelines-section h2 {
+        color: #1a1a1a;
+        margin-bottom: 1rem;
+        font-size: 1.5rem;
+      }
+
+      .guidelines-section p {
+        margin-bottom: 1rem;
+        color: #666;
+      }
+
+      .guidelines-section ul {
+        margin-bottom: 1rem;
+        padding-left: 1.5rem;
+        color: #666;
+      }
+
+      .guidelines-section li {
+        margin-bottom: 0.5rem;
+      }
+
+      .important-note {
+        background: #fff8e6;
+        border-left: 4px solid #ffd700;
+        padding: 1rem;
+        margin: 1rem 0;
+        border-radius: 0 4px 4px 0;
+      }
+
+      code {
+        background: #f1f1f1;
+        padding: 0.2rem 0.4rem;
+        border-radius: 4px;
+        font-family: monospace;
+      }
+
+      /* Mobile Menu Styles */
+      .hamburger {
+        display: none;
+        cursor: pointer;
+        padding: 0.5rem;
+        position: relative;
+        margin-left: auto;
+        width: 25px;
+        height: 21px;
+      }
+
+      .hamburger span {
+        display: block;
+        width: 25px;
+        height: 3px;
+        background-color: #1a1a1a;
+        margin: 5px 0;
+        transition: all 0.3s ease;
+        position: absolute;
+        left: 0;
+      }
+
+      /* Mobile Navigation */
+      @media (max-width: 768px) {
+        .hamburger {
+          display: block;
+          z-index: 101;
+        }
+
+        .hamburger.active {
+          position: fixed;
+          top: 1.5rem;
+          right: 1.5rem;
+        }
+
+        .nav-links {
+          position: fixed;
+          top: 0;
+          right: -100%;
+          width: 70%;
+          height: 100vh;
+          background: rgba(255, 255, 255, 0.3);
+          backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          z-index: 100;
+          transition: right 0.3s ease;
+          border-left: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .nav-links.active {
+          right: 0;
+        }
+
+        .nav-links a {
+          margin: 1.5rem 0;
+          font-size: 1.2rem;
+        }
+
+        /* Hamburger Animation */
+        .hamburger.active span:nth-child(1) {
+          transform: translateY(9px) rotate(45deg);
+        }
+
+        .hamburger.active span:nth-child(2) {
+          opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+          transform: translateY(-9px) rotate(-45deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div class="nav-content">
+        <a href="../index.html" class="logo">
+          <img src="../assets/tgn-logo.png" alt="The Globe Network Logo" />
+        </a>
+        <div class="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <div class="nav-links">
+          <a href="../index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="servers.html">Servers</a>
+          <a href="apply.html">Apply</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="guidelines-container">
+      <div class="guidelines-header">
+        <h1>Community Guidelines</h1>
+        <p>Creating a safe and enjoyable environment for all players</p>
+      </div>
+
+      <div class="guidelines-content">
+        <div class="guidelines-section">
+          <h2>1. Respect Others</h2>
+          <ul>
+            <li>
+              Treat all other players with respect and kindness, both
+              in-character (IC) and out-of-character (OOC). Harassment, bullying
+              and toxic behaviour is strictly prohibited and will lead to swift
+              removal from all of our servers.
+            </li>
+          </ul>
+        </div>
+
+        <div class="guidelines-section">
+          <h2>2. Stay In-Character</h2>
+          <ul>
+            <li>
+              When participating in roleplay, always remain in-character unless
+              otherwise specified. If you need to speak out-of-character (OOC),
+              make sure to clearly indicate this by using appropriate tags. For
+              example: <em>(OOC) [Your message]</em>. This helps avoid confusion
+              and keeps the roleplay experience enjoyable for all players.
+            </li>
+          </ul>
+        </div>
+
+        <div class="guidelines-section">
+          <h2>3. Follow Roblox & Discord's Terms of Service</h2>
+          <ul>
+            <li>
+              All actions, language and behaviour must comply with Roblox and
+              Discord's rules. You can find
+              <a
+                href="https://en.help.roblox.com/hc/en-us/articles/203313410-Roblox-Community-Standards"
+                target="_blank"
+                >Roblox's Community Guidelines here</a
+              >
+              and
+              <a href="https://discord.com/terms" target="_blank"
+                >Discord's TOS here</a
+              >.
+            </li>
+          </ul>
+        </div>
+
+        <div class="guidelines-section">
+          <h2>4. Follow Staff Directions</h2>
+          <ul>
+            <li>
+              Network moderators and admins are here to keep the community safe
+              and enjoyable. Always follow their instructions and contact them
+              by using the /ticket command in any channel if you need support.
+            </li>
+          </ul>
+        </div>
+
+        <div class="guidelines-section">
+          <h2>5. No Exploiting or Cheating</h2>
+          <ul>
+            <li>
+              The use of exploits, hacks or third-party software is strictly
+              forbidden not only on our network, but on Roblox as a whole. Play
+              fair and keep the experience fun for everyone.
+            </li>
+          </ul>
+        </div>
+
+        <div class="guidelines-section">
+          <h2>6. No Staff Impersonation</h2>
+          <ul>
+            <li>
+              Do not pretend or impersonate any of our staff members in any way.
+              This includes using similar names, profile pictures or falsely
+              claiming authority over our servers.
+            </li>
+          </ul>
+        </div>
+
+        <div class="guidelines-section">
+          <h2>7. No Real-Life Event Recreations</h2>
+          <ul>
+            <li>
+              Do not recreate or roleplay real-life events, especially those
+              involving tragedies, violence, or sensitive topics. This includes
+              historical or current events that may be deemed disrespectful or
+              inappropriate for the community. Keep roleplay fictional and
+              respectful.
+            </li>
+          </ul>
+        </div>
+
+        <div class="guidelines-section">
+          <h2>8. No Spamming or Flooding</h2>
+          <ul>
+            <li>
+              Avoid spamming messages and commands in our channels. Flooding the
+              in-game chat disrupts the roleplay experience for others.
+            </li>
+          </ul>
+        </div>
+
+        <div class="guidelines-section">
+          <h2>9. Appropriate Character Names and Behaviour</h2>
+          <ul>
+            <li>
+              All in-game character names, Discord usernames, behaviour and
+              backstories must be appropriate for our servers. Avoid using
+              offensive, inappropriate or troll names.
+            </li>
+          </ul>
+        </div>
+
+        <div class="guidelines-section">
+          <h2>10. No Meta-Gaming</h2>
+          <ul>
+            <li>
+              Do not use out-of-character (OOC) information to influence
+              in-character (IC) discussions and actions. Keep IC and OOC
+              knowledge separate to maintain fairness in roleplay scenes.
+            </li>
+          </ul>
+        </div>
+
+        <div class="guidelines-section">
+          <h2>11. No Advertising</h2>
+          <ul>
+            <li>
+              Advertising other servers, games or groups is strictly prohibited.
+              The # self-promotion channel may only be used to share YouTube,
+              Twitch, or other media content related to our servers. To post you
+              must have the @Content Creator role.
+            </li>
+          </ul>
+        </div>
+
+        <div class="guidelines-section">
+          <h2>12. Avatar Guidelines</h2>
+          <ul>
+            <li>
+              When roleplaying on our servers, we allow you to wear a big range
+              of items, not typically allowed on most servers. All we ask is you
+              read and follow our
+              <a
+                href="https://drive.google.com/file/d/1GNpW7uilbTMyd1J1fwXNoBetQVH5y9zK/view"
+                target="_blank"
+                >Avatar Guidelines</a
+              >. If you have any questions about this, feel free to ask a staff
+              member!
+            </li>
+          </ul>
+        </div>
+
+        <div class="guidelines-section">
+          <h2>Questions and Support</h2>
+          <p>
+            If you have questions about these guidelines or need to report a
+            violation, please:
+          </p>
+          <ul>
+            <li>Contact a staff member in-game</li>
+            <li>Use the <code>/ticket</code> command in our Discord server</li>
+            <li>Visit our <a href="contact.html">Contact page</a></li>
+          </ul>
+        </div>
+
+        <div class="important-note">
+          <p>
+            <strong>Important Note:</strong> These guidelines are subject to
+            change. Staff members have final say in all situations and may take
+            appropriate action as needed to maintain a positive community
+            environment.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <script src="../js/components.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        Components.loadFooter();
+      });
+
+      // Mobile Menu Functionality
+      const hamburger = document.querySelector('.hamburger');
+      const navLinks = document.querySelector('.nav-links');
+      const links = document.querySelectorAll('.nav-links a');
+
+      hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
+        navLinks.classList.toggle('active');
+      });
+
+      links.forEach((link) => {
+        link.addEventListener('click', () => {
+          hamburger.classList.remove('active');
+          navLinks.classList.remove('active');
+        });
+      });
+    </script>
+  </body>
+</html>
